@@ -1,32 +1,127 @@
-# Security Operations Center (SOC) Automation Scripts
+# SOC Automation Scripts
 
-A collection of lightweight Python automation tools designed to assist Tier 1 SOC Analysts with rapid incident response, log triage, and network monitoring.
+[![Python](https://img.shields.io/badge/python-3.8%2B-blue)](#)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](#)
+[![CI](https://img.shields.io/badge/CI-GitHub%20Actions-lightgrey)](#)
 
-## 🛠️ Tool 1: Automated Log Parser & Incident Triage Pipeline (`log_parser.py`)
+A collection of lightweight Python automation tools to assist Tier‑1 Security Operations Center (SOC) analysts with rapid incident response, log triage, and basic network monitoring.
 
-This script simulates a Security Information and Event Management (SIEM) pipeline by automatically scanning raw server logs from a system hard drive, isolating high-priority malicious activity, and generating permanent, timestamped incident reports.
+This repository contains small, focused scripts intended for lab use, training, and lightweight automation in investigative workflows. Do not run these tools on production systems or sensitive data without review and proper authorization.
 
-### Key Features
-*   **File I/O Management:** Efficiently handles reading raw system logs and writing alert streams to disk using Python's secure context managers (`with open`).
-*   **String Manipulation & Filtering:** Parses individual log entries line-by-line using conditional logic (`if/else` and `in`) to isolate threat indicators.
-*   **Dynamic Forensics Stamping:** Imports the native `datetime` library to inject automated timestamps onto critical threat reports for forensic tracking.
+## Quick summary
 
-### Skills Demonstrated
-*   Python Fundamentals (Lists, Loops, Conditionals, Library Imports)
-*   Linux Environment Navigation (Ubuntu, Gedit, Process Management)
-*   Data Pipeline Triage & Log Analysis
+- Small, standalone Python scripts that parse logs, surface high-priority events, and assist with basic triage workflows.
+- Designed for learning and lab environments; follow organizational policies before running on production data.
 
+## Table of contents
 
-## 🗺️ Project Future Roadmap
+- Installation
+- Requirements
+- Usage
+- Example input & output
+- Available scripts
+- Roadmap
+- Contributing
+- Security & Privacy
+- License
+- Donate / Contact
 
-To simulate corporate infrastructure scaling, the following architectural upgrades are actively planned for implementation:
+## Installation
 
-- [ ] **Phase 1: ChatOps Integration (Webhooks)** - Integrate the `requests` library to instantly shoot critical alert cards into a secure Discord/Slack channel.
-- [ ] **Phase 2: Data Architecture Normalization (JSON)** - Migrate text logging outputs to enterprise-standard JSON blocks to ensure seamless pipeline compatibility with Splunk and ElasticSearch.
-- [ ] **Phase 3: Network Concurrency (Multi-Threading)** - Upgrade the upcoming network socket scanner to handle concurrent operations, allowing it to triage 100+ ports simultaneously.
+1. Clone the repository:
 
+   git clone https://github.com/2radforu/soc-Automation-Scripts.git
+   cd soc-Automation-Scripts
 
+2. (Optional but recommended) Create a virtual environment and install dependencies:
 
+   python -m venv .venv
+   source .venv/bin/activate    # Linux / macOS
+   .venv\Scripts\activate     # Windows
+
+   pip install -r requirements.txt
+
+If requirements.txt is not present, install only the packages your environment needs (e.g., pytest for tests) or run the scripts with the system Python for quick testing.
+
+## Requirements
+
+- Tested with Python 3.8+.
+- Recommended: run inside a virtual environment.
+
+If you add third-party packages, list them in requirements.txt (pip freeze > requirements.txt after installing) or provide a pyproject.toml.
+
+## Usage
+
+The primary script is log_parser.py. It now provides a small library function and a CLI so you can call it from other tools or directly from the shell.
+
+Examples (exact flags are implemented in the script):
+
+- Basic log parsing (JSON output):
+
+  python log_parser.py --input examples/sample.log --output out/alerts.json --format json
+
+- Basic log parsing (text output):
+
+  python log_parser.py --input examples/sample.log --output out/alerts.txt --format text --pattern "Malicious"
+
+- Run tests:
+
+  pytest
+
+## Example input & output
+
+Example input (examples/sample.log):
+
+    2026-06-25 14:03:12 sshd[12345]: Failed password for invalid user admin from 203.0.113.42 port 54212 ssh2
+    2026-06-25 14:04:10 webapp[54321]: Malicious request detected from 198.51.100.23 - /admin.php
+
+Example output (examples/sample_alerts.json - JSON Lines):
+
+{"timestamp": "2026-06-25T14:04:10Z", "event": "Malicious request detected from 198.51.100.23 - /admin.php", "rule": "pattern: Malicious", "severity": "high"}
+
+Note: The parser writes one JSON object per line when using --format json. This makes it easy to stream results into other tools.
+
+## Available scripts
+
+- log_parser.py — Automated Log Parser & Incident Triage Pipeline
+  - Purpose: Scan system/server logs, detect high-priority events (by simple pattern matching), and write alert streams to disk in plain text or JSON lines.
+  - Behavior: By default it looks for the literal string "Malicious" but you can pass any pattern (substring) via --pattern.
+
+(If you add more scripts, list them here and include usage examples.)
+
+## Roadmap
+
+- Phase 1: ChatOps Integration (Webhooks) — integrate `requests` to post alerts to Slack/Discord/MS Teams.
+- Phase 2: Data Architecture Normalization (JSON) — migrate outputs to structured JSON for Splunk/Elastic compatibility.
+- Phase 3: Network Concurrency (asyncio/multi-threading) — upgrade network tools to handle concurrent operations at scale.
+
+## Contributing
+
+Contributions are welcome. To contribute:
+
+1. Open an issue describing the feature or bug.
+2. Fork the repository, create a topic branch, and submit a pull request with a clear description of changes.
+3. Include tests where possible (tests/ directory) and add examples demonstrating behavior.
+
+Guidelines
+
+- Keep changes small and focused.
+- Do not commit real or sensitive logs. Use synthetic examples or redacted files in examples/.
+- Follow PEP 8 for Python code style.
+
+## Security & Privacy
+
+- Do NOT commit sensitive logs, credentials, or private keys.
+- Redact or synthesize example logs before committing.
+- If you find a security vulnerability in the code, open a private issue or contact the repository owner.
+
+## License
+
+This repository is licensed under the MIT License. See LICENSE for details.
+
+## Donate / Contact
+
+If you find these scripts useful, consider supporting me via Buy Me A Coffee:
 
 <a href="https://buymeacoffee.com" target="_blank">
   <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174">
