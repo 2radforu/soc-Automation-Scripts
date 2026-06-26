@@ -4,6 +4,8 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](#)
 [![CI](https://img.shields.io/badge/CI-GitHub%20Actions-lightgrey)](#)
 
+* Updated log_parser.py to support automated disk writes and active forensic timestamping.
+
 A collection of lightweight Python automation tools to assist Tier‑1 Security Operations Center (SOC) analysts with rapid incident response, log triage, and basic network monitoring.
 
 This repository contains small, focused scripts intended for lab use, training, and lightweight automation in investigative workflows. Do not run these tools on production systems or sensitive data without review and proper authorization.
@@ -114,8 +116,6 @@ Guidelines
 - Do NOT commit sensitive logs, credentials, or private keys.
 - Redact or synthesize example logs before committing.
 - If you find a security vulnerability in the code, open a private issue or contact the repository owner.
-
-* Updated log_parser.py to support automated disk writes and active forensic timestamping.
 
 ## License
 
