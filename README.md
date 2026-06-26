@@ -115,6 +115,8 @@ Guidelines
 - Redact or synthesize example logs before committing.
 - If you find a security vulnerability in the code, open a private issue or contact the repository owner.
 
+* Updated log_parser.py to support automated disk writes and active forensic timestamping.
+
 ## License
 
 This repository is licensed under the MIT License. See LICENSE for details.
