@@ -1,6 +1,18 @@
-#SOC Automation Scripts
+# Security Operations Center (SOC) Automation Scripts
 
-A collection of Python tools for Tier 1 SOC Analysts to assist with log triage and network monitoring.
+A collection of lightweight Python automation tools designed to assist Tier 1 SOC Analysts with rapid incident response, log triage, and network monitoring.
 
-##Tools Included:
-*log_parser.py - Automatically scans raw system logs from a hard drive, filters high-priority malicious activity, and generates timestamped alert files.
+## 🛠️ Tool 1: Automated Log Parser & Incident Triage Pipeline (`log_parser.py`)
+
+This script simulates a Security Information and Event Management (SIEM) pipeline by automatically scanning raw server logs from a system hard drive, isolating high-priority malicious activity, and generating permanent, timestamped incident reports.
+
+### Key Features
+*   **File I/O Management:** Efficiently handles reading raw system logs and writing alert streams to disk using Python's secure context managers (`with open`).
+*   **String Manipulation & Filtering:** Parses individual log entries line-by-line using conditional logic (`if/else` and `in`) to isolate threat indicators.
+*   **Dynamic Forensics Stamping:** Imports the native `datetime` library to inject automated timestamps onto critical threat reports for forensic tracking.
+
+### Skills Demonstrated
+*   Python Fundamentals (Lists, Loops, Conditionals, Library Imports)
+*   Linux Environment Navigation (Ubuntu, Gedit, Process Management)
+*   Data Pipeline Triage & Log Analysis
+
