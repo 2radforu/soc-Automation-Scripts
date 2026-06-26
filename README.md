@@ -8,7 +8,7 @@
 
 A collection of lightweight Python automation tools to assist Tier‑1 Security Operations Center (SOC) analysts with rapid incident response, log triage, and basic network monitoring.
 
-This repository contains small, focused scripts intended for lab use, training, and lightweight automation in investigative workflows. Do not run these tools on production systems or sensitive data without review and proper authorization.
+This repository contains small, focused scripts intended for lab use, training, and lightweight automation in investigative workflows. Do not run these tools on production systems or sensitive dat[...]
 
 ## Quick summary
 
@@ -88,6 +88,19 @@ Note: The parser writes one JSON object per line when using --format json. This 
 - log_parser.py — Automated Log Parser & Incident Triage Pipeline
   - Purpose: Scan system/server logs, detect high-priority events (by simple pattern matching), and write alert streams to disk in plain text or JSON lines.
   - Behavior: By default it looks for the literal string "Malicious" but you can pass any pattern (substring) via --pattern.
+
+- port_scanner.py — Concurrent TCP port scanner
+  - Purpose: Scan TCP ports on a host concurrently using ThreadPoolExecutor and report open ports (shows common service names when available).
+  - Usage: python3 port_scanner.py <target> [options]
+  - Flags:
+    - -s, --start: Start port (default: 1)
+    - -e, --end: End port (inclusive, default: 1024)
+    - -t, --timeout: Socket timeout in seconds (default: 0.5)
+    - -w, --workers: Number of concurrent worker threads (default: 100)
+    - -o, --output: Optional output file to append results
+  - Example:
+
+    python3 port_scanner.py 127.0.0.1 -s 1 -e 1024 -o open_ports.txt
 
 (If you add more scripts, list them here and include usage examples.)
 
