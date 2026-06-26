@@ -16,6 +16,18 @@ This script simulates a Security Information and Event Management (SIEM) pipelin
 *   Linux Environment Navigation (Ubuntu, Gedit, Process Management)
 *   Data Pipeline Triage & Log Analysis
 
+
+## 🗺️ Project Future Roadmap
+
+To simulate corporate infrastructure scaling, the following architectural upgrades are actively planned for implementation:
+
+- [ ] **Phase 1: ChatOps Integration (Webhooks)** - Integrate the `requests` library to instantly shoot critical alert cards into a secure Discord/Slack channel.
+- [ ] **Phase 2: Data Architecture Normalization (JSON)** - Migrate text logging outputs to enterprise-standard JSON blocks to ensure seamless pipeline compatibility with Splunk and ElasticSearch.
+- [ ] **Phase 3: Network Concurrency (Multi-Threading)** - Upgrade the upcoming network socket scanner to handle concurrent operations, allowing it to triage 100+ ports simultaneously.
+
+
+
+
 <a href="https://buymeacoffee.com" target="_blank">
   <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174">
 </a>
