@@ -102,6 +102,96 @@ Note: The parser writes one JSON object per line when using --format json. This 
 
     python3 port_scanner.py 127.0.0.1 -s 1 -e 1024 -o open_ports.txt
 
+
+### Usage examples for port_scanner.py
+
+Usage help
+
+```bash
+$ python3 port_scanner.py -h
+usage: port_scanner.py [-h] [-s START] [-e END] [-t TIMEOUT] [-w WORKERS] [-o OUTPUT] target
+
+Simple concurrent TCP port scanner
+
+positional arguments:
+  target                Target hostname or IPv4 address (e.g. 127.0.0.1 or example.com)
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -s, --start START     Start port (default: 1)
+  -e, --end END         End port (inclusive) (default: 1024)
+  -t, --timeout TIMEOUT Socket timeout in seconds (default: 0.5)
+  -w, --workers WORKERS Number of concurrent worker threads (default: 100)
+  -o, --output OUTPUT   Optional output file to append results
+```
+
+Example 1 — Quick default scan (ports 1–1024) on localhost
+
+```bash
+$ python3 port_scanner.py 127.0.0.1
+--- Initializing Automated Multi-Port Scan on 127.0.0.1 (127.0.0.1) ---
+Ports: 1-1024, timeout=0.5s, workers=100
+[ALERT]: Port 22 is OPEN (ssh)
+[ALERT]: Port 80 is OPEN (http)
+--- Scan Complete: evaluated 1024 ports in 1.12s ---
+```
+
+Example 2 — Scan a small range with a longer timeout and fewer workers
+
+```bash
+$ python3 port_scanner.py example.com -s 20 -e 1024 -t 1.5 -w 50
+--- Initializing Automated Multi-Port Scan on example.com (93.184.216.34) ---
+Ports: 20-1024, timeout=1.5s, workers=50
+[ALERT]: Port 80 is OPEN (http)
+--- Scan Complete: evaluated 1005 ports in 5.73s ---
+```
+
+Example 3 — Full TCP scan (1–65535) — use with caution
+
+```bash
+$ python3 port_scanner.py example.com -s 1 -e 65535 -t 1.0 -w 200
+--- Initializing Automated Multi-Port Scan on example.com (93.184.216.34) ---
+Ports: 1-65535, timeout=1.0s, workers=200
+[ALERT]: Port 22 is OPEN (ssh)
+[ALERT]: Port 443 is OPEN (https)
+--- Scan Complete: evaluated 65535 ports in 420.07s ---
+```
+
+Example 4 — Save open ports to a file
+
+```bash
+$ python3 port_scanner.py 192.0.2.1 -s 1 -e 1024 -o open_ports.txt
+--- Initializing Automated Multi-Port Scan on 192.0.2.1 (192.0.2.1) ---
+Ports: 1-1024, timeout=0.5s, workers=100
+[ALERT]: Port 80 is OPEN (http)
+--- Scan Complete: evaluated 1024 ports in 2.01s ---
+Saved 1 open port(s) to open_ports.txt
+```
+
+Sample contents of open_ports.txt (each line appended with timestamp, target, port, service):
+
+```text
+2026-06-26 22:10:00 192.0.2.1 80 http
+```
+
+Example 5 — Interrupted scan (Ctrl‑C)
+
+```bash
+$ python3 port_scanner.py 10.0.0.5 -s 1 -e 65535
+--- Initializing Automated Multi-Port Scan on 10.0.0.5 (10.0.0.5) ---
+Ports: 1-65535, timeout=0.5s, workers=100
+[ALERT]: Port 22 is OPEN (ssh)
+^C
+[INTERRUPTED] Scan cancelled by user.
+--- Scan Complete: evaluated 65535 ports in 12.34s ---
+```
+
+Notes and best practices
+- Always have permission before scanning any host or network. Unauthorized scanning may be illegal or violate policies.
+- Increase timeout (-t) for slow/remote networks; increase workers (-w) for faster parallelism but be mindful of local resource limits and network impact.
+- The script resolves hostnames to IPv4 addresses (socket.gethostbyname) — pass an IPv4 address if you want to avoid DNS.
+- For automation, redirect output or use -o to log open ports for later processing.
+
 (If you add more scripts, list them here and include usage examples.)
 
 ## Roadmap
