@@ -16,3 +16,6 @@ This script simulates a Security Information and Event Management (SIEM) pipelin
 *   Linux Environment Navigation (Ubuntu, Gedit, Process Management)
 *   Data Pipeline Triage & Log Analysis
 
+<a href="https://buymeacoffee.com" target="_blank">
+  <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174">
+</a>
