@@ -1,0 +1,4 @@
+2026-06-25 14:03:12 sshd[12345]: Failed password for invalid user admin from 203.0.113.42 port 54212 ssh2
+2026-06-25 14:04:10 webapp[54321]: Malicious request detected from 198.51.100.23 - /admin.php
+2026-06-25 14:05:00 webapp[54321]: Suspicious activity from 203.0.113.5 - /login
+2026-06-25 14:06:01 api[3333]: MALICIOUS_PAYLOAD detected in request body from 192.0.2.11

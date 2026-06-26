@@ -1,0 +1,1 @@
+{"timestamp": "2026-06-25T14:04:10Z", "event": "Malicious request detected from 198.51.100.23 - /admin.php", "rule": "pattern: Malicious", "severity": "high"}
